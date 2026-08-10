@@ -1,26 +1,11 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
 const { google } = require('googleapis');
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
 
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 const SHEET_NAME = 'Leads';
 
-// Locally: reads service-account.json from disk (gitignored, never committed).
-// On a host like Render: paste the full JSON as one line into the
-// GOOGLE_SERVICE_ACCOUNT_JSON environment variable instead — there's no
-// file upload there, so this is how the secret gets in.
 const authOptions = { scopes: ['https://www.googleapis.com/auth/spreadsheets'] };
 if (process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
   authOptions.credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
-} else {
-  authOptions.keyFile = 'service-account.json';
 }
 const auth = new google.auth.GoogleAuth(authOptions);
 
@@ -31,7 +16,6 @@ async function ensureHeaderRow(sheets) {
     spreadsheetId: SPREADSHEET_ID,
     range: `${SHEET_NAME}!A1:G1`,
   });
-
   const hasHeader = existing.data.values && existing.data.values.length > 0;
   if (!hasHeader) {
     await sheets.spreadsheets.values.update({
@@ -43,7 +27,16 @@ async function ensureHeaderRow(sheets) {
   }
 }
 
-app.post('/api/leads', async (req, res) => {
+module.exports = async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') {
+    return res.status(405).json({ status: 'error', message: 'Method not allowed' });
+  }
+
   try {
     const { name, phone, course, comment, lang, source } = req.body;
 
@@ -74,14 +67,9 @@ app.post('/api/leads', async (req, res) => {
       }
     });
 
-    res.json({ status: 'success' });
+    res.status(200).json({ status: 'success' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ status: 'error', message: 'Failed to save lead' });
   }
-});
-
-app.get('/health', (req, res) => res.json({ ok: true }));
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+};

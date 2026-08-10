@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uz">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,9 +31,13 @@
 
   /* ---------- NAV ---------- */
   .nav{position:sticky; top:0; z-index:50; background:var(--navy); border-bottom:1px solid rgba(184,150,46,.25);}
-  .nav .container{display:flex; align-items:center; justify-content:space-between; height:60px;}
+  .nav .container{display:flex; align-items:center; justify-content:space-between; height:auto; min-height:60px; flex-wrap:wrap; gap:10px 0; padding-top:8px; padding-bottom:8px;}
   .nav-logo{font-family:var(--serif); color:#fff; font-size:1.05rem; letter-spacing:.02em; font-weight:700;}
   .nav-logo span{color:var(--gold-light);}
+  .nav-actions{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  .nav-link{font-family:var(--sans); font-size:.82rem; font-weight:700; color:var(--gold-light); text-decoration:none; letter-spacing:.01em; white-space:nowrap;}
+  .nav-link:hover{color:#fff;}
+  .btn-nav{padding:9px 18px; font-size:.82rem;}
   .lang-toggle{display:flex; border:1px solid rgba(255,255,255,.25); border-radius:999px; overflow:hidden;}
   .lang-toggle button{background:transparent; border:none; color:rgba(255,255,255,.7); font-family:var(--sans); font-size:.8rem; font-weight:700; padding:7px 14px; cursor:pointer; letter-spacing:.03em;}
   .lang-toggle button.active{background:var(--gold); color:var(--navy-dark);}
@@ -113,43 +117,16 @@
 <nav class="nav">
   <div class="container">
     <div class="nav-logo">EIT <span>LC</span></div>
-    <div class="lang-toggle" role="group" aria-label="Language">
-      <button type="button" data-lang-btn="ru" class="active">RU</button>
-      <button type="button" data-lang-btn="uz">UZ</button>
+    <div class="nav-actions">
+      <a href="https://eit-pt.vercel.app" class="nav-link" data-i18n="nav-placement">Проверь уровень</a>
+      <a href="#form" class="btn btn-nav" data-i18n="nav-signup">Записаться</a>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang-btn="ru">RU</button>
+        <button type="button" data-lang-btn="uz" class="active">UZ</button>
+      </div>
     </div>
   </div>
 </nav>
-
-<header class="hero">
-  <svg class="hero-ladder" viewBox="0 0 1080 420" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="ladderGrad" x1="0" y1="1" x2="1" y2="0">
-        <stop offset="0" stop-color="#B8962E" stop-opacity="0"/>
-        <stop offset="1" stop-color="#B8962E" stop-opacity=".55"/>
-      </linearGradient>
-    </defs>
-    <rect x="640" y="330" width="60" height="90" fill="url(#ladderGrad)"/>
-    <rect x="715" y="290" width="60" height="130" fill="url(#ladderGrad)"/>
-    <rect x="790" y="240" width="60" height="180" fill="url(#ladderGrad)"/>
-    <rect x="865" y="180" width="60" height="240" fill="url(#ladderGrad)"/>
-    <rect x="940" y="110" width="60" height="310" fill="url(#ladderGrad)"/>
-  </svg>
-  <div class="container">
-    <div class="eyebrow" data-i18n="eyebrow">EIT LC — Excellence in Teaching</div>
-    <h1 data-i18n="h1">Выбери курс — начни в этом месяце</h1>
-    <p data-i18n="hero-sub">IELTS, SAT, Multilevel CEFR и General English (A1–B2). 98% поступления в топ-вузы, партнёрство с British Council и Edu-Action IDP.</p>
-    <a href="#form" class="btn"><span data-i18n="hero-cta">Записаться</span><span class="btn-arrow">→</span></a>
-  </div>
-</header>
-
-<div class="trust">
-  <div class="container">
-    <div class="trust-item" data-i18n="trust1">600+ студентов</div>
-    <div class="trust-item" data-i18n="trust2">98% поступления</div>
-    <div class="trust-item" data-i18n="trust3">British Council — партнёр</div>
-    <div class="trust-item" data-i18n="trust4">Edu-Action IDP — партнёр</div>
-  </div>
-</div>
 
 <section class="section">
   <div class="container">
@@ -191,9 +168,49 @@
         <div class="course-price" data-i18n="c4-price">500 000 сум/предмет</div>
       </button>
 
+      <button type="button" class="course-card" data-course="Kids" data-course-label-ru="Kids" data-course-label-uz="Kids">
+        <span class="course-badge">KIDS</span>
+        <div class="course-check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3 data-i18n="c5-title">Английский для детей</h3>
+        <p data-i18n="c5-desc">Игровой формат, разговорная практика с первых занятий.</p>
+        <div class="course-price" data-i18n="c5-price">цена по запросу</div>
+      </button>
+
     </div>
   </div>
 </section>
+
+<header class="hero">
+  <svg class="hero-ladder" viewBox="0 0 1080 420" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="ladderGrad" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="#B8962E" stop-opacity="0"/>
+        <stop offset="1" stop-color="#B8962E" stop-opacity=".55"/>
+      </linearGradient>
+    </defs>
+    <rect x="640" y="330" width="60" height="90" fill="url(#ladderGrad)"/>
+    <rect x="715" y="290" width="60" height="130" fill="url(#ladderGrad)"/>
+    <rect x="790" y="240" width="60" height="180" fill="url(#ladderGrad)"/>
+    <rect x="865" y="180" width="60" height="240" fill="url(#ladderGrad)"/>
+    <rect x="940" y="110" width="60" height="310" fill="url(#ladderGrad)"/>
+  </svg>
+  <div class="container">
+    <div class="eyebrow" data-i18n="eyebrow">EIT LC — Excellence in Teaching</div>
+    <h1 data-i18n="h1">Выбери курс — начни в этом месяце</h1>
+    <p data-i18n="hero-sub">IELTS, SAT, Multilevel CEFR и General English (A1–B2). 98% поступления в топ-вузы, партнёрство с British Council и Edu-Action IDP.</p>
+    <a href="#form" class="btn"><span data-i18n="hero-cta">Записаться</span><span class="btn-arrow">→</span></a>
+  </div>
+</header>
+
+<div class="trust">
+  <div class="container">
+    <div class="trust-item" data-i18n="trust1">600+ студентов</div>
+    <div class="trust-item" data-i18n="trust2">98% поступления</div>
+    <div class="trust-item" data-i18n="trust3">British Council — партнёр</div>
+    <div class="trust-item" data-i18n="trust4">Edu-Action IDP — партнёр</div>
+  </div>
+</div>
+
 
 <section class="section form-section" id="form">
   <div class="container">
@@ -221,6 +238,7 @@
             <option value="IELTS" data-i18n="opt-c2">IELTS</option>
             <option value="Multilevel CEFR" data-i18n="opt-c3">Multilevel (CEFR)</option>
             <option value="SAT" data-i18n="opt-c4">SAT (Digital)</option>
+            <option value="Kids" data-i18n="opt-c5">Английский для детей</option>
           </select>
         </div>
         <div class="field">
@@ -258,13 +276,16 @@
       "c1-title": "Общий английский A1–B2", "c1-desc": "От новичка до уверенного B2. Можно начать с любого уровня.", "c1-price": "от 450 000 сум/мес",
       "c2-title": "IELTS", "c2-desc": "Реальные баллы преподавателей — без завышений.", "c2-price": "678 000 сум/мес",
       "c3-title": "Multilevel (CEFR)", "c3-desc": "Подготовка к национальному сертификационному экзамену.", "c3-price": "цена по запросу",
+      "nav-placement": "Проверь уровень",
+      "nav-signup": "Записаться",
       "c4-title": "SAT (Digital)", "c4-desc": "Математика и английский для поступления за рубежом.", "c4-price": "500 000 сум/предмет",
+      "c5-title": "Английский для детей", "c5-desc": "Игровой формат, разговорная практика с первых занятий.", "c5-price": "цена по запросу",
       "form-h2": "Оставь заявку", "form-sub": "Мы свяжемся с тобой в течение дня.",
       "lbl-name": 'Имя и фамилия <span class="required-mark">*</span>',
       "lbl-phone": 'Номер телефона <span class="required-mark">*</span>',
       "lbl-course": 'Курс <span class="required-mark">*</span>',
       "lbl-comment": "Комментарий (необязательно)",
-      "opt-choose": "Выбери курс", "opt-c1": "Общий английский A1–B2", "opt-c2": "IELTS", "opt-c3": "Multilevel (CEFR)", "opt-c4": "SAT (Digital)",
+      "opt-choose": "Выбери курс", "opt-c1": "Общий английский A1–B2", "opt-c2": "IELTS", "opt-c3": "Multilevel (CEFR)", "opt-c4": "SAT (Digital)", "opt-c5": "Английский для детей",
       "ph-comment": "Например: удобное время занятий",
       "btn-submit": "Отправить заявку",
       "form-note": "Нажимая «Отправить», вы соглашаетесь на то, что мы свяжемся с вами по указанному номеру.",
@@ -284,13 +305,16 @@
       "c1-title": "Umumiy ingliz tili A1–B2", "c1-desc": "Boshlang'ich darajadan ishonchli B2 gacha. Istalgan darajadan boshlash mumkin.", "c1-price": "450 000 so'mdan/oyiga",
       "c2-title": "IELTS", "c2-desc": "O'qituvchilarning haqiqiy bali — bo'rttirishsiz.", "c2-price": "678 000 so'm/oyiga",
       "c3-title": "Multilevel (CEFR)", "c3-desc": "Milliy sertifikatlashtirish imtihoniga tayyorgarlik.", "c3-price": "narxi so'rov asosida",
+      "nav-placement": "Darajangizni tekshiring",
+      "nav-signup": "Ro'yxatdan o'tish",
       "c4-title": "SAT (Digital)", "c4-desc": "Xorijda o'qish uchun matematika va ingliz tili.", "c4-price": "500 000 so'm/fan",
+      "c5-title": "Bolalar uchun ingliz tili", "c5-desc": "O'yin shaklida, birinchi darsdanoq muloqot amaliyoti.", "c5-price": "narxi so'rov asosida",
       "form-h2": "Ariza qoldiring", "form-sub": "Bir kun ichida siz bilan bog'lanamiz.",
       "lbl-name": 'Ism va familiya <span class="required-mark">*</span>',
       "lbl-phone": 'Telefon raqami <span class="required-mark">*</span>',
       "lbl-course": 'Kurs <span class="required-mark">*</span>',
       "lbl-comment": "Izoh (ixtiyoriy)",
-      "opt-choose": "Kursni tanlang", "opt-c1": "Umumiy ingliz tili A1–B2", "opt-c2": "IELTS", "opt-c3": "Multilevel (CEFR)", "opt-c4": "SAT (Digital)",
+      "opt-choose": "Kursni tanlang", "opt-c1": "Umumiy ingliz tili A1–B2", "opt-c2": "IELTS", "opt-c3": "Multilevel (CEFR)", "opt-c4": "SAT (Digital)", "opt-c5": "Bolalar uchun ingliz tili",
       "ph-comment": "Masalan: qulay dars vaqti",
       "btn-submit": "Arizani yuborish",
       "form-note": "«Yuborish» tugmasini bosish orqali siz ko'rsatilgan raqam orqali siz bilan bog'lanishimizga rozilik bildirasiz.",
@@ -403,7 +427,7 @@
     }
   });
 
-  applyLang('ru');
+  applyLang('uz');
 })();
 </script>
 
